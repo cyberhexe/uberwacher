@@ -42,7 +42,8 @@ setup(
     python_requires='>=3.6, <4',
     install_requires=[
         "python-telegram-bot",
-        "gpio"
+        "gpio",
+        "gpiozero"
     ],  # Optional
     entry_points={  # Optional
         'console_scripts': [

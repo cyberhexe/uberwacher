@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 import logging
-from gpiozero import MotionSensor, LED
+from gpiozero import MotionSensor
 
 from telegram import ParseMode
 from telegram.ext import Updater, CommandHandler
@@ -47,19 +47,13 @@ INFO_MESSAGES = {'start': "ALARMS ACTIVATED. The bot will spam you with messages
 
 global gpio_pin
 
-global sensor
-
 def start(update, context):
     """Send a message when the command /start is issued."""
-    global sensor
-    sensor = ''
-    if sensor:
-        update.message.reply_text("ALARMS ALREADY ACTIVATED. Consider restarting the bot if that seems wrong.")
-
     global gpio_pin
     sensor = MotionSensor(gpio_pin)
 
     def on_motion():
+        # bot.send_message(chat_id
         update.message.reply_text("MOTION DETECTED",
                                   parse_mode=ParseMode.MARKDOWN)
 

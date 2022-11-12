@@ -3,6 +3,7 @@ requires = [
     "setuptools>=42",
     "wheel",
     "python-telegram-bot",
-    "gpio"
+    "gpio",
+    "gpiozero"
 ]
 build-backend = "setuptools.build_meta"
