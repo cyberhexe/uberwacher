@@ -90,11 +90,13 @@ class SubscriberNotifier:
         global gpio_pin
         sensor = MotionSensor(gpio_pin)
 
+        bot = self.bot
+
         def on_motion():
-            self.bot.send_message(chat_id,
-                                  "MOTION DETECTED",
-                                  parse_mode=ParseMode.MARKDOWN
-                                  )
+            bot.send_message(chat_id,
+                             "MOTION DETECTED",
+                             parse_mode=ParseMode.MARKDOWN
+                             )
 
         def no_motion():
             logging.info("[*] No motion detected")
@@ -103,7 +105,7 @@ class SubscriberNotifier:
 
         sensor.when_motion = on_motion
         sensor.when_no_motion = no_motion
-        self.bot.send_message(chat_id,
+        bot.send_message(chat_id,
                               INFO_MESSAGES['start'],
                               parse_mode=ParseMode.MARKDOWN)
         logger.info(f"A new motion sensor configured for chat id {chat_id}")
