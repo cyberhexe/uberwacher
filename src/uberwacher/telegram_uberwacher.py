@@ -141,8 +141,9 @@ def start(update, context):
     chat_id = update.message.chat.id
 
     global SUBSCRIBERS
-    with open(SUBSCRIBERS_FILE, 'r') as f:
-        SUBSCRIBERS = [int(line.strip()) for line in f.readlines() if line.strip()]
+    if os.path.exists(SUBSCRIBERS_FILE):
+        with open(SUBSCRIBERS_FILE, 'r') as f:
+            SUBSCRIBERS = [int(line.strip()) for line in f.readlines() if line.strip()]
 
     if chat_id in SUBSCRIBERS:
         logger.info(f"A chat with ID {chat_id} is already stored in the subscribers list")
