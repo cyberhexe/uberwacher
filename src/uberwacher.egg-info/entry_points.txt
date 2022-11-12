@@ -1,2 +1,0 @@
-[console_scripts]
-uberwacher = uberwacher.telegram_uberwacher:main
