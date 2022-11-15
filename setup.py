@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-version = "1.0.1"
+version = "1.0.2"
 
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages

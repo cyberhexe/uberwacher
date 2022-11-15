@@ -49,6 +49,7 @@ def get_arguments():
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    datefmt="%m/%d/%Y %I:%M:%S %p %Z",
                     level=logging.INFO,
                     # filename="main.log"
                     )
@@ -93,13 +94,14 @@ class SubscriberNotifier:
         bot = self.bot
 
         def on_motion():
+            logger.info("MOTION DETECTED")
             bot.send_message(chat_id,
                              "MOTION DETECTED",
                              parse_mode=ParseMode.MARKDOWN
                              )
 
         def no_motion():
-            logging.info("[*] No motion detected")
+            logger.info("[*] No motion detected")
 
         sensor.wait_for_no_motion()
 
@@ -109,6 +111,8 @@ class SubscriberNotifier:
                               INFO_MESSAGES['start'],
                               parse_mode=ParseMode.MARKDOWN)
         logger.info(f"A new motion sensor configured for chat id {chat_id}")
+        while True:
+            pass
 
 
 class MotionSensorNotifier:
@@ -135,9 +139,12 @@ class MotionSensorNotifier:
         sensor.when_no_motion = no_motion
         update.message.reply_text(INFO_MESSAGES['start'],
                                   parse_mode=ParseMode.MARKDOWN)
+        while True:
+            pass
 
 
 # 1282513876
+@whitelist_only
 def start(update, context):
     """Send a message when the command /start is issued."""
     chat_id = update.message.chat.id
@@ -159,7 +166,7 @@ def start(update, context):
             f.write(f"{chat_id}")
             f.write(os.linesep)
 
-
+@whitelist_only
 def show_help(update, context):
     """Send a message when the command /help is issued."""
     update.message.reply_text(INFO_MESSAGES['help'],
